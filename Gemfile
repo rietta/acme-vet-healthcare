@@ -36,6 +36,7 @@ group :development, :test do
   gem 'capybara-selenium'
   gem 'webdrivers'
   gem 'pry-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do
