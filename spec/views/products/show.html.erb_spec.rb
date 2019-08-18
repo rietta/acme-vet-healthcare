@@ -6,7 +6,7 @@ RSpec.describe "products/show", type: :view do
       :name => "Name",
       :description => "MyText",
       :published => false,
-      :category => "Category"
+      :category => :otc
     ))
   end
 
@@ -15,6 +15,5 @@ RSpec.describe "products/show", type: :view do
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/MyText/)
     expect(rendered).to match(/false/)
-    expect(rendered).to match(/Category/)
   end
 end

@@ -29,11 +29,21 @@ RSpec.describe ProductsController, type: :controller do
   # Product. As you add validations to Product, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      name: 'Test Drug',
+      description: 'Testing test test',
+      published: false,
+      category: :otc
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      name: nil,
+      description: nil,
+      published: false,
+      category: :otc
+    }
   }
 
   # This should return the minimal set of values that should be in the session

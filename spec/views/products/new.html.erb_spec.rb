@@ -6,7 +6,7 @@ RSpec.describe "products/new", type: :view do
       :name => "MyString",
       :description => "MyText",
       :published => false,
-      :category => "MyString"
+      :category => :prescription
     ))
   end
 

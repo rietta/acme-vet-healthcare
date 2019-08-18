@@ -31,7 +31,12 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails'
+
+
+  # Rspec rails is not quite ready for Rails 6 (should be soon!)
+  # Using beta release as per discussion at https://github.com/rails/rails/issues/35417
+  gem 'rspec-rails', '~> 4.0.0.beta2'
+
   gem 'capybara'
   gem 'capybara-selenium'
   gem 'webdrivers'
