@@ -17,7 +17,7 @@ RSpec.describe Product, type: :model do
   it 'is invalid when category is nil/NULL' do
     product = Product.new(name: 'test')
     expect(product).to be_invalid
-    expect(product.errors[:category]).to eq ["can't be blank"]
+    expect(product.errors[:category]).to include "can't be blank"
   end
 
   it 'can be saved to the database even when description is over 256 characters' do
@@ -33,31 +33,28 @@ RSpec.describe Product, type: :model do
 
   describe 'is invalid when category is not one of :otc, :presciption, or :restricted' do
     it 'is invalid with bogus category' do
-      expect do
-        Product.new(
+      product = Product.new(
           name: 'test',
           category: 'Bogus Category Name'
         )
-      end.to raise_error ArgumentError
+      expect(product).to be_invalid
+      expect(product.errors[:category]).to eq ["is not included in the list"]
     end
 
     it 'is valid with otc' do
-      expect do
-        Product.new(name: 'test', category: :otc)
-      end.to_not raise_error
+      product = Product.new(name: 'test', category: 'otc')
+      expect(product).to be_valid
     end
 
     it 'is valid with prescription' do
-      expect do
-        Product.new(name: 'test', category: :prescription)
-      end.to_not raise_error
+      product = Product.new(name: 'test', category: 'prescription')
+      expect(product).to be_valid
     end
 
 
     it 'is valid with restricted' do
-      expect do
-        Product.new(name: 'test', category: :restricted)
-      end.to_not raise_error
+      product = Product.new(name: 'test', category: 'restricted')
+      expect(product).to be_valid
     end
   end
 
