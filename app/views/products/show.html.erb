@@ -22,3 +22,10 @@
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
+
+<h2>Shopping Cart</h2>
+<% if @cart&.contains?(product_id: @product.id) %>
+  <%= link_to('Remove from Cart', remove_cart_path(product_id: @product.id)) %>
+<% else %>
+  <%= link_to('Add to Cart', add_cart_path(product_id: @product.id)) %>
+<% end %>
