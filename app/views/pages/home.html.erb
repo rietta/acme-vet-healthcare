@@ -2,3 +2,9 @@
 <p>
   <%= link_to("Choose from #{Product.published.count} Products", products_path) %>
 </p>
+
+<% unless user_signed_in? %>
+  <%= link_to 'Sign in', new_user_session_path %> 
+  or
+  <%= link_to 'Sign up for a New Account', new_user_registration_path %> 
+<% end %>

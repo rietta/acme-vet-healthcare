@@ -8,6 +8,15 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
+  <div class="field">
+    <%= f.label :vet_registration_number %><br />
+    <%= f.text_field :vet_registration_number, minlength: 6, placeholder: 'VRxxxxx' %>
+    <p>
+      Enter your stat registration number if you are a Doctor of Veterinary 
+      Medicine registered with the State to order restricted medications.
+    </p>
+  </div>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
