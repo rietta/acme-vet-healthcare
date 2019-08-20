@@ -20,7 +20,7 @@
   <%= @product.category %>
 </p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to('Edit', edit_product_path(@product)) if current_user&.admin? %> |
 <%= link_to 'Back', products_path %>
 
 <h2>Shopping Cart</h2>
