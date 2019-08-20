@@ -11,6 +11,7 @@ class CartsController < ApplicationController
   before_action :load_product_id
 
   def add
+    authorize self
     if @product_id
       @cart.add(product_id: @product_id)
       save_cart
@@ -21,6 +22,7 @@ class CartsController < ApplicationController
   end
 
   def remove
+    authorize self
     if @product_id
       @cart.remove(product_id: @product_id)
       save_cart
