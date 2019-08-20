@@ -7,6 +7,9 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+# note: require 'devise' after require 'rspec/rails'
+require 'devise'
+
 # Configure capybara and headless chrome for UI testing in rspec
 require 'capybara/rspec'
 Capybara.server = :puma # Until your setup is working
@@ -81,4 +84,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+end
+
+def login_admin
+  before(:each) do
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    admin = FactoryBot.create(:user, role: :admin)
+    sign_in admin, scope: :user
+  end
 end

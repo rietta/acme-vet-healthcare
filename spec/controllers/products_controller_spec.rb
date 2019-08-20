@@ -24,6 +24,7 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe ProductsController, type: :controller do
+  login_admin
 
   # This should return the minimal set of attributes required to create a valid
   # Product. As you add validations to Product, be sure to
