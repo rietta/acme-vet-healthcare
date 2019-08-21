@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+ footer {
+   border-top: thick solid gray;
+   background-color: blanchedalmond;
+ }
