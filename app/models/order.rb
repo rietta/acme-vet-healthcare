@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  enum status: { pending: 0, complete: 2 }
+  enum status: { pending: 0, declined: 1, complete: 2 }
   belongs_to :user, required: false
   has_many :order_products
 
