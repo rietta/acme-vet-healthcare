@@ -1,0 +1,60 @@
+<%= form_with(model: order, local: true) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being submitted:</h2>
+
+      <ul>
+        <% order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h2>Customer Details</h2>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.phone_field :phone, required: true %>
+  </div>
+
+  <h2>Shipping Address</h2>
+  <div class="field">
+    <%= form.label :address1 %>
+    <%= form.text_field :address1, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address2 %>
+    <%= form.text_field :address2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :zip %>
+    <%= form.text_field :zip, required: true %>
+  </div>
+
+  <%= form.submit %>
+
+
+<% end %>

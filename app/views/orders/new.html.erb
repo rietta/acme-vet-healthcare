@@ -1,1 +1,9 @@
 <h1>New Order</h1>
+
+<% if @cart.any? %>
+  <%= render 'form', order: @order %>
+<% else %>
+  <div class="notice">
+    Your cart is empty. Please select some <%= link_to('products', products_path) %> first.
+  </div>
+<% end %>
