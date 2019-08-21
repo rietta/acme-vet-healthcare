@@ -55,7 +55,43 @@
   </div>
 
   <h2>Products Included in Your Order</h2>
-  
+  <table width="100%">
+    <tr>
+      <th>Product ID</th>
+      <th>Name</th>
+      <th>Prescription #</th>
+      <th>Special Message</th>
+    </tr>
+
+    <%= fields_for(:order_products) do |line_item_form| %>
+      <%
+        binding.pry
+        order_product = line_item_form.object.class
+        product = order_product.product
+      %>
+      <tr>
+        <td><%= link_to(product.id, product_path(product)) %></td>
+        <td><%= product.name %></td>
+        <td>
+          <% if product.prescription? %>
+            <%= line_item_form.text_field(:prescription_number, minlength: 6, required: true) %>
+          <% else %>
+            N/A
+          <% end %>
+        </td>
+        <td>
+          <% if order_product.veterinarian_alert? %>
+            <div class="notice">
+              <strong>This product is restricted by law</strong> and may
+              only be ordered by registered veterinarians. It will be excluded
+              from your order. If you are a vet, be sure to sign in with your account
+              that has been registered with your VR number.
+            </div>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </table>
 
   <%= form.submit %>
 

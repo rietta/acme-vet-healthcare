@@ -18,7 +18,7 @@ class Order < ApplicationRecord
     return order unless cart.any?
 
     cart.products.each do |product|
-      order.order_products.new(
+      order.order_products.build(
         product: product,
         current_user: user
       )
