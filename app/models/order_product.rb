@@ -40,7 +40,7 @@ class OrderProduct < ApplicationRecord
 
     errors.add(
       :product,
-      'Restricted product may only be ordered by a registered Veterinarian'
+      'Restricted product may only be ordered by a registered Veterinarian. Please remove from order.'
     )
   end
 end

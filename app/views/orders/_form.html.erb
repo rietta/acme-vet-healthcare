@@ -61,6 +61,7 @@
       <th>Name</th>
       <th>Prescription #</th>
       <th>Special Message</th>
+      <th>Exclude?</th>
     </tr>
 
     <%= form.fields_for(:order_products) do |line_item_form| %>
@@ -82,13 +83,17 @@
         </td>
         <td>
           <% if order_product.veterinarian_alert? %>
-            <div class="notice">
+            <div class="warning" id="error_explanation">
+              <h2>Restricted Product</h2>
               <strong>This product is restricted by law</strong> and may
-              only be ordered by registered veterinarians. It will be excluded
-              from your order. If you are a vet, be sure to sign in with your account
-              that has been registered with your VR number.
+              only be ordered by registered veterinarians. If you are a vet, be sure to sign in with your account
+              that has been registered with your VR number. Otherwise, you must remove it from your order.
+              Click the box to the right to do so now.
             </div>
           <% end %>
+        </td>
+        <td>
+          <%= line_item_form.check_box(:_destroy) %>
         </td>
       </tr>
     <% end %>

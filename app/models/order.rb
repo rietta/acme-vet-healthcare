@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
-  belongs_to :user
+  enum status: { pending: 0, complete: 2 }
+  belongs_to :user, required: false
   has_many :order_products
 
   auto_strip_attributes(

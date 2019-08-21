@@ -28,6 +28,10 @@ class Cart
     @cart_contents.delete(product_id.to_s)
   end
 
+  def clear
+    @cart_contents = {}
+  end
+
   def contains?(product_id:)
     @cart_contents.include?(product_id.to_s)
   end
