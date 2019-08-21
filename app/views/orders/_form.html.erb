@@ -63,18 +63,19 @@
       <th>Special Message</th>
     </tr>
 
-    <%= fields_for(:order_products) do |line_item_form| %>
+    <%= form.fields_for(:order_products) do |line_item_form| %>
       <%
-        binding.pry
-        order_product = line_item_form.object.class
+        order_product = line_item_form.object
         product = order_product.product
       %>
+      <%= line_item_form.hidden_field(:product_id) %>
       <tr>
         <td><%= link_to(product.id, product_path(product)) %></td>
         <td><%= product.name %></td>
         <td>
           <% if product.prescription? %>
-            <%= line_item_form.text_field(:prescription_number, minlength: 6, required: true) %>
+            <%= line_item_form.label(:prescription_number) %>
+            <%= line_item_form.text_field(:prescription_number, placeholder: '000000', minlength: 6, required: true) %>
           <% else %>
             N/A
           <% end %>

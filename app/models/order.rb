@@ -13,6 +13,8 @@ class Order < ApplicationRecord
     :zip
   )
 
+  accepts_nested_attributes_for :order_products, allow_destroy: true
+
   def self.build(user:, cart:)
     order = Order.new(user: user)
     return order unless cart.any?
