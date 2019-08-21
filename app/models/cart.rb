@@ -4,6 +4,7 @@
 # This Plain Ruby Object handles the serialization of the shopping cart object.
 # As the user adds and removes products, the cart_controller will update this object.
 class Cart
+  attr_reader :cart_contents
 
   def initialize(json: nil)
     # Products will be stored as a hash, where the product id will be the
@@ -35,5 +36,6 @@ class Cart
     @cart_contents.to_json(opts)
   end
 
+  delegate :any?, :length, to: :cart_contents
 
 end
