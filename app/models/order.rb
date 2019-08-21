@@ -12,4 +12,17 @@ class Order < ApplicationRecord
     :state,
     :zip
   )
+
+  def self.build(user:, cart:)
+    order = Order.new(user: user)
+    return order unless cart.any?
+
+    cart.products.each do |product|
+      order.order_products.new(
+        product: product,
+        current_user: user
+      )
+    end
+    order
+  end
 end

@@ -7,4 +7,16 @@ class Product < ApplicationRecord
   validates :category, presence: true, inclusion: { in: %w[otc prescription restricted] }
 
   scope :published, -> { where(published: true) }
+
+  def otc?
+    category == 'otc'
+  end
+
+  def prescription?
+    category == 'prescription'
+  end
+
+  def restricted?
+    category == 'restricted'
+  end
 end

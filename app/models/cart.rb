@@ -38,4 +38,7 @@ class Cart
 
   delegate :any?, :length, to: :cart_contents
 
+  def products
+    Product.published.where(id: @cart_contents.keys)
+  end
 end

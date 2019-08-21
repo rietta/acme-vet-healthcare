@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   def new
-    @order = Order.new(user: current_user)
+    @order = Order.build(user: current_user, cart: @cart)
     authorize @order
   end
 
