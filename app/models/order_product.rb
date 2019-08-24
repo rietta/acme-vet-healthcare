@@ -6,7 +6,6 @@ class OrderProduct < ApplicationRecord
 
   belongs_to :order
   belongs_to :product
-  has_one :user, through: :order
 
   attr_accessor :current_user
 
@@ -29,8 +28,12 @@ class OrderProduct < ApplicationRecord
     if: :prescription?
   )
 
+  def user
+    order.user || current_user
+  end
+
   def veterinarian_alert?
-    restricted? && !(user || current_user)&.veterinarian?
+    restricted? && !user&.veterinarian?
   end
 
   private
