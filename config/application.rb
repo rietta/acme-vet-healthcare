@@ -31,5 +31,8 @@ module AcmeVeterinaryHealthcare
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.paths.add File.join('app', 'services'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'services', '*')]
   end
 end
