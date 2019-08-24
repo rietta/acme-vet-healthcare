@@ -31,7 +31,7 @@ class RequestStateApproval
     OpenStruct.new(JSON.parse(@response.body))
   end
 
-  def retry_needed?
+  def retry?
     @response.nil? || @response&.code == 504
   end
 
