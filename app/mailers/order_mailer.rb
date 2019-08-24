@@ -7,6 +7,6 @@ class OrderMailer < ApplicationMailer
   #
   def confirmation(order:)
     @order = order
-    mail to: @order.mail
+    mail to: @order.email
   end
 end
