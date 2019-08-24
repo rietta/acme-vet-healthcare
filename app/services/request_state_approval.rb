@@ -14,10 +14,11 @@ class RequestStateApproval
 
   def run
     3.times do |i|
-      post
-      break if success?
-
-      sleep(i**2) # increasing backoff
+      begin
+        post
+      rescue RestClient::GatewayTimeout
+        sleep(i**2) # increasing backoff
+      end
     end
   end
 
