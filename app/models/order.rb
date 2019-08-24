@@ -32,9 +32,9 @@ class Order < ApplicationRecord
   end
 
   def process_restrictions
-    order_products.restricted.unsubmitted_for_decision(
-      &:submit_for_decision_by_state_api
-    )
+    order_products.restricted.unsubmitted_for_decision.each do |p|
+      p.submit_for_decision_by_state_api
+    end
     declined! if declined_by_government?
   end
 
