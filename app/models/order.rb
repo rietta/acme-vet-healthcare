@@ -41,4 +41,10 @@ class Order < ApplicationRecord
   def declined_by_government?
     order_products.restricted.rejected.any?
   end
+
+  def email_confirmation
+    return if declined?
+
+    OrderMailer.confirmation(order: @order).deliver_now
+  end
 end
