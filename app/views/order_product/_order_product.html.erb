@@ -1,0 +1,11 @@
+<li>
+  <%= order_product.name %>
+  <% if order_product.restricted? %>
+    <ol>
+      <li>Restricted Product Requiring Government Approval</li>
+      <li>Decision: <%= order_product.decision %></li>
+      <li>Decision Identifier: <%= order_product.decision_identifier %></li>
+      <li>Decision Date/Time: <%= order_product.decided_at.strftime('%m/%d/%Y %I:%M%p %Z') %></li>
+    </ol>
+  <% end %>
+</li>

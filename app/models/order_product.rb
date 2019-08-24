@@ -20,7 +20,7 @@ class OrderProduct < ApplicationRecord
 
   attr_accessor :current_user
 
-  delegate :otc?, :prescription?, :restricted?, to: :product
+  delegate :otc?, :prescription?, :restricted?, :name, to: :product
 
   # Conditional Validations in Rails
 

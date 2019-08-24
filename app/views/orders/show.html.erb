@@ -17,5 +17,10 @@
     of the restricted items that were included in your order. The denial is listed below.
   </p>
   <ul>
+    <%= render @order.order_product.restricted.rejected %>
   </ul>
+
+  <p>
+    This halts your order. Your other items will not be processed.
+  </p>
 <% end %>
