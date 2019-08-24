@@ -6,7 +6,6 @@ class OrderProduct < ApplicationRecord
 
   belongs_to :order
   belongs_to :product
-  has_one :user, through: :order
 
   # This is an advanced AR query that joins with the products table and filters the results
   # down to just those orders with a linked restricted product. Far better than querying them
@@ -39,10 +38,14 @@ class OrderProduct < ApplicationRecord
     if: :prescription?
   )
 
-  validates :decision_identifier, length: { is: 36 }
+  validates :decision_identifier, length: { is: 36 }, allow_blank: true
+
+  def user
+    order.user || current_user
+  end
 
   def veterinarian_alert?
-    restricted? && !(user || current_user)&.veterinarian?
+    restricted? && !user&.veterinarian?
   end
 
   def accept?
