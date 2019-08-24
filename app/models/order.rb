@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   enum status: { pending: 0, declined: 1, complete: 2 }
   belongs_to :user, required: false
@@ -27,5 +29,16 @@ class Order < ApplicationRecord
       )
     end
     order
+  end
+
+  def process_restrictions
+    order_products.restricted.unsubmitted_for_decision(
+      &:submit_for_decision_by_state_api
+    )
+    declined! if declined_by_government?
+  end
+
+  def declined_by_government?
+    order_products.restricted.rejected.any?
   end
 end

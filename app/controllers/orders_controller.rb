@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.user = current_user
     authorize @order
-    if @order.save
+    if @order.save && @order.process_restrictions
       @cart.clear
       render :show
     else

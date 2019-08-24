@@ -1,10 +1,21 @@
-<h1>Order Submitted</h1>
+<% if @order.pending? %>
+  <h1>Order Submitted</h1>
 
-<p>
-  Thank you for your order. It has been submitted for processing at
-  <%= @order.created_at.strftime('%m/%d/%Y %I:%M%p %Z') %>.
-</p>
-<p>
-  Please allow up to three hours for processing. You will receive an e-mail confirmation
-  when your product has shipped.
-</p>
+  <p>
+    Thank you for your order. It has been submitted for processing at
+    <%= @order.created_at.strftime('%m/%d/%Y %I:%M%p %Z') %>.
+  </p>
+  <p>
+    Please allow up to three hours for processing. You will receive an e-mail confirmation
+    when your product has shipped.
+  </p>
+<% else %>
+  <h1>Order Declined</h1>
+
+  <p>
+    We're sorry, but your order has been declined because the government has rejected one
+    of the restricted items that were included in your order. The denial is listed below.
+  </p>
+  <ul>
+  </ul>
+<% end %>
