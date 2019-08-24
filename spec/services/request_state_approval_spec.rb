@@ -25,4 +25,13 @@ RSpec.describe RequestStateApproval, type: :model do
   it '.retry? returns true before running' do
     expect(subject.retry?).to eq true
   end
+
+  it '.result returns a parsed object' do
+    subject.run
+    r = subject.result
+    expect(r.order_id).to eq 'ACME234241'
+    expect(r.decision).to_not be_nil
+    expect(r.decision_identifier).to_not be_nil
+    expect(r.decided_at).to_not be_nil
+  end
 end
