@@ -44,7 +44,6 @@ RSpec.describe 'Order Placing', type: :system do
 
   context 'Ordering OTC Product' do 
     
-
     before(:each) do
       setup_product_in_cart(category: 'otc')
       login_as_user
@@ -68,6 +67,46 @@ RSpec.describe 'Order Placing', type: :system do
 
 
   end
-  context 'Prescription product'
-  context 'Restricted product'
+
+  context 'Prescription product' do
+    before(:each) do
+      setup_product_in_cart(category: 'prescription')
+      login_as_user
+      click_on 'Start Order'
+      fill_in_customer_details
+    end
+
+    it 'fails without a prescription number' do
+      click_on 'Create Order'
+      expect(page).to_not have_text 'Order Submitted'
+    end
+
+    it 'succedes with a prescription number' do
+      fill_in 'Prescription number', with: 'PR00098'
+      click_on 'Create Order'
+      expect(page).to have_text 'Order Submitted'
+      expect(page).to have_text 'It has been submitted for processing'
+    end
+  end
+
+  context 'Restricted product' do
+    context 'as a non-veternarian' do
+      before(:each) do
+        setup_product_in_cart(category: 'restricted')
+        login_as_user
+        click_on 'Start Order'
+        fill_in_customer_details
+      end
+
+      it 'shows a warning about restricted item' do
+        expect(page).to have_text 'This product is restricted by law'
+      end
+
+      it 'prevents order entry with a restricted item that must be removed' do
+        click_on 'Create Order'
+        expect(page).to have_text 'Restricted product may only be ordered by a registered Veterinarian'
+      end
+  
+    end
+  end
 end
