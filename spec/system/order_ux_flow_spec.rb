@@ -62,6 +62,8 @@ RSpec.describe 'Order Placing', type: :system do
     it 'succeeds with customer details' do
       fill_in_customer_details
       click_on 'Create Order'
+      expect(page).to have_text 'Order Submitted'
+      expect(page).to have_text 'It has been submitted for processing'
     end
 
 
