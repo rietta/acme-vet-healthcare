@@ -6,6 +6,8 @@ RSpec.describe 'Order Placing', type: :system do
   let(:order_template) { FactoryBot.build(:order )}
   let(:user_password) { SecureRandom.hex }
   let(:user) { FactoryBot.create(:user, role: :visitor, password: user_password) }
+  let(:vet_user) { FactoryBot.create(:user, role: :visitor, vet_registration_number: 'VR090902414', password: user_password) }
+
 
   def setup_product_in_cart(category:)
     @product = FactoryBot.create(:product, published: true, category: category)
@@ -18,6 +20,14 @@ RSpec.describe 'Order Placing', type: :system do
     user.save
     click_on 'Sign in'
     fill_in 'Email', with: user.email
+    fill_in 'Password', with: user_password
+    click_on 'Log in'
+  end
+
+  def login_as_vet
+    user.save
+    click_on 'Sign in'
+    fill_in 'Email', with: vet_user.email
     fill_in 'Password', with: user_password
     click_on 'Log in'
   end
@@ -106,7 +116,25 @@ RSpec.describe 'Order Placing', type: :system do
         click_on 'Create Order'
         expect(page).to have_text 'Restricted product may only be ordered by a registered Veterinarian'
       end
-  
+    end
+
+    context 'as a veternarian' do
+      before(:each) do
+        setup_product_in_cart(category: 'restricted')
+        login_as_vet
+        click_on 'Start Order'
+        fill_in_customer_details
+      end
+
+      it 'does not showsa warning about restricted item' do
+        expect(page).to_not have_text 'This product is restricted by law'
+      end
+
+      it 'proceedes to order submitted' do
+         click_on 'Create Order'
+         expect(page).to have_text 'Order Submitted'
+         expect(page).to have_text 'It has been submitted for processing'
+      end
     end
   end
 end
