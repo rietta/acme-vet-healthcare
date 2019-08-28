@@ -94,3 +94,4 @@ def login_admin
     sign_in admin, scope: :user
   end
 end
+

@@ -4,12 +4,22 @@ require 'rails_helper'
 RSpec.describe 'Order Placing', type: :system do
 
   let(:order_template) { FactoryBot.build(:order )}
+  let(:user_password) { SecureRandom.hex }
+  let(:user) { FactoryBot.create(:user, role: :visitor, password: user_password) }
 
   def setup_product_in_cart(category:)
     @product = FactoryBot.create(:product, published: true, category: category)
 
     visit product_path(@product.id)
     click_on 'Add to Cart'
+  end
+
+  def login_as_user
+    user.save
+    click_on 'Sign in'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user_password
+    click_on 'Log in'
   end
 
 
@@ -33,8 +43,11 @@ RSpec.describe 'Order Placing', type: :system do
   end
 
   context 'Ordering OTC Product' do 
+    
+
     before(:each) do
       setup_product_in_cart(category: 'otc')
+      login_as_user
       click_on 'Start Order'
     end
 
