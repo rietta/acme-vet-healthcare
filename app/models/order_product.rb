@@ -29,7 +29,7 @@ class OrderProduct < ApplicationRecord
   )
 
   def user
-    order.user || current_user
+    order&.user || current_user
   end
 
   def veterinarian_alert?
