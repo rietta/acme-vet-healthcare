@@ -7,7 +7,9 @@ class OrderProduct < ApplicationRecord
   belongs_to :order
   belongs_to :product
 
-  attr_accessor :current_user
+  def user
+    order.user
+  end
 
   delegate :otc?, :prescription?, :restricted?, to: :product
 
@@ -27,10 +29,6 @@ class OrderProduct < ApplicationRecord
     length: { minimum: 6 },
     if: :prescription?
   )
-
-  def user
-    order&.user || current_user
-  end
 
   def veterinarian_alert?
     restricted? && !user&.veterinarian?
