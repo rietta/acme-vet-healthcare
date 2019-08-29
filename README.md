@@ -7,7 +7,7 @@ https://young-caverns-28973.herokuapp.com/admin/medications
 
 Create Med
 
-curl -v -H "Accept: application/json" -H "Content-type: application/json" -d '{"name":"Benadryl"}' http://127.0.0.1:3000/admin/medications
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -d '{"name":"Benadryl", "dose_in_kg", "2"}' http://127.0.0.1:3000/admin/medications
 
 Update
 
