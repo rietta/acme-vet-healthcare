@@ -13,3 +13,9 @@ Product.create(name: 'Benadryl', published: true, category: 'otc')
 Product.create(name: 'Penicillin', published: true, category: 'prescription')
 Product.create(name: 'Steroid Creme', published: true, category: 'prescription')
 Product.create(name: 'Carfentanil', published: true, category: 'restricted')
+
+
+Medication.create(name: 'Benadryl', dose_per_kg: 2)
+Medication.create(name: 'Aspirin', dose_per_kg: 3)
+Medication.create(name: 'Keflex', dose_per_kg: 1.12)
+Medication.create(name: 'Prednisone', dose_per_kg: 1.89)

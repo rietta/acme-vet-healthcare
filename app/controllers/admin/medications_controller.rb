@@ -1,15 +1,22 @@
+# frozen_string_literal: true
+
 module Admin
   class MedicationsController < ActionController::Base
     skip_before_action :verify_authenticity_token
     respond_to :json
 
     def index
-      render(json: Medication.all)
+      medications = if params[:name].present?
+                      Medication.where('name ILIKE ?', params[:name].strip.downcase + '%')
+                    else
+                      Medication.all
+      end
+      render(json: medications)
     end
 
     def show
       render json: Medication.find(params[:id])
-    rescue ActiveRecord::RecordNotFound 
+    rescue ActiveRecord::RecordNotFound
       head :not_found
     end
 
@@ -20,7 +27,7 @@ module Admin
       else
         render json: medication.errors, status: :unprocessable_entity
       end
-    rescue ActiveRecord::RecordNotFound 
+    rescue ActiveRecord::RecordNotFound
       head :not_found
     end
 
@@ -31,7 +38,7 @@ module Admin
       else
         render json: medication.errors, status: :unprocessable_entity
       end
-    rescue ActiveRecord::RecordNotFound 
+    rescue ActiveRecord::RecordNotFound
       head :not_found
     end
 
@@ -39,11 +46,11 @@ module Admin
       medication = Medication.find(params[:id])
       medication.destroy
       head :ok
-    rescue ActiveRecord::RecordNotFound 
+    rescue ActiveRecord::RecordNotFound
       head :not_found
     end
 
-    private 
+    private
 
     def medication_params
       params.permit(:name)
