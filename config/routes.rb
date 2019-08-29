@@ -9,6 +9,11 @@ Rails.application.routes.draw do
     get :remove
   end
 
+  namespace :admin do
+    resources :users
+    resources :medications, except: %w[new edit]
+  end
+
   resources :orders, only: %w[new create]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -1,24 +1,10 @@
-# README
+Create Med
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -d '{"name":"Benadryl"}' http://127.0.0.1:3000/admin/medications
 
-Things you may want to cover:
+Update
 
-* Ruby version
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X PUT -d '{"name":"Keflex II"}' http://127.0.0.1:3000/admin/medications/2123b735-718b-441c-bc51-e409ff4ea90c
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+curl -v -H "Accept: application/json" -H "Content-type: application/json" -X DELETE http://127.0.0.1:3000/admin/medications/2123b735-718b-441c-bc51-e409ff4ea90c
