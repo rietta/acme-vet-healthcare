@@ -53,7 +53,7 @@ module Admin
     private
 
     def medication_params
-      params.permit(:name)
+      params.permit(:name, :dose_per_kg)
     end
   end
 end
